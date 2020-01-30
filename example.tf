@@ -1,10 +1,10 @@
 provider "aws" {
   profile = "doug"
-  region  = "us-east-1"
+  region  = "${var.region}"
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-b374d5a5"
+  ami           = "${var.amis[var.region]}"
   instance_type = "t2.micro"
 
   provisioner "local-exec" {
