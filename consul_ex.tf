@@ -3,12 +3,16 @@ terraform {
 }
 
 provider "aws" {
-  profile = "doug"
-  region  = "us-east-1"
+  profile = "${var.aws_profile}"
+  region  = "${var.aws_region}"
 }
 
 module "consul" {
   source      = "hashicorp/consul/aws"
   version     = "0.6.1"
   num_servers = "3"
+}
+
+output "consul_server_asg_name" {
+  value = "${module.consul.asg_name_servers}"
 }
